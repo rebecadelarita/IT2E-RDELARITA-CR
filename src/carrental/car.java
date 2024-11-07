@@ -8,19 +8,21 @@ import java.sql.SQLException;
 public class car {
     public void Car(){
         Scanner sc = new Scanner(System.in);
+        config conf = new config();
         
         boolean isSelected = false;
         
         do{
+            viewCar();
+            
             System.out.println("\nCar:");
             System.out.println("1. Add Car");
             System.out.println("2. Edit Car");
             System.out.println("3. Remove Car");
-            System.out.println("4. View Car");
-            System.out.println("5. Select Car");
-            System.out.println("6. Exit");
+            System.out.println("4. Select Car");
+            System.out.println("5. Exit");
             System.out.print("Enter option: ");
-            int option = sc.nextInt();
+            int option = conf.validateInt();
             
             switch(option){
                 case 1:
@@ -33,12 +35,9 @@ public class car {
                     removeCar();
                     break;
                 case 4:
-                    viewCar();
-                    break;
-                case 5:
                     viewIndivReport();
                     break;
-                case 6:
+                case 5:
                     isSelected = true;
                     break;
                 default:
@@ -55,7 +54,7 @@ public class car {
         String ctype = sc.nextLine();
         
         System.out.print("Car Price: ");
-        double cprice = sc.nextDouble();
+        double cprice = conf.validateDouble();
         
         System.out.print("Car Status: ");
         String cstatus = sc.next();
@@ -73,11 +72,11 @@ public class car {
         config conf = new config();
         
         System.out.print("Enter Car ID to edit: ");
-        int car_id = sc.nextInt();
+        int car_id = conf.validateInt();
         
         while(conf.getSingleValue("SELECT car_id FROM car WHERE car_id = ?", car_id) == 0){
             System.out.print("ID doesn't exist, try again: ");
-            car_id = sc.nextInt();
+            car_id = conf.validateInt();
         }
         
         System.out.print("Enter new Type: ");
@@ -85,7 +84,7 @@ public class car {
         String newType = sc.nextLine();
         
         System.out.print("Enter new Price: ");
-        double newPrice = sc.nextDouble();
+        double newPrice = conf.validateDouble();
         
         System.out.print("Enter new Status: ");
         String newStatus = sc.next();
@@ -103,11 +102,11 @@ public class car {
         config conf = new config();
         
         System.out.print("Enter Car ID to delete: ");
-        int car_id = sc.nextInt();
+        int car_id = conf.validateInt();
         
         while(conf.getSingleValue("SELECT car_id FROM car WHERE car_id = ?", car_id) == 0){
             System.out.print("ID doesn't exist, try again: ");
-            car_id = sc.nextInt();
+            car_id = conf.validateInt();
         }
         
         String sqlDelete = "DELETE FROM car WHERE car_id = ?";
@@ -131,11 +130,11 @@ public class car {
         config conf = new config();
         
         System.out.print("Enter Car ID: ");
-        int car_id = sc.nextInt();
+        int car_id = conf.validateInt();
         
         while(conf.getSingleValue("SELECT car_id FROM car WHERE car_id = ?", car_id) == 0){
             System.out.print("ID doesn't exist, try again: ");
-            car_id = sc.nextInt();
+            car_id = conf.validateInt();
         }
         
         try{

@@ -12,6 +12,7 @@ public class main {
         costumer c = new costumer();
         car cr = new car();
         rental r = new rental();
+        config conf = new config();
         
         boolean isSelected = false;
         
@@ -23,7 +24,7 @@ public class main {
             System.out.println("4. View Rental History");
             System.out.println("5. Exit");
             System.out.print("Enter option: ");
-            int option = sc.nextInt();
+            int option = conf.validateInt();
             
             switch(option){
                 case 1:
@@ -39,8 +40,11 @@ public class main {
                     showRentHistory();
                     break;
                 case 5:
-                    isSelected = true;
-                    break;
+                    System.out.print("Confirm exit? (yes/no): ");
+                    String confirm = sc.next();
+                    
+                    if(confirm.contains("y"))
+                        System.exit(0);
                 default:
                     System.out.println("Error, invalid option.");
             }
@@ -52,11 +56,11 @@ public class main {
         config conf = new config();
         
         System.out.print("Enter Costumer ID: ");
-        int cid = sc.nextInt();
+        int cid = conf.validateInt();
         
         while(conf.getSingleValue("SELECT c_id FROM costumer WHERE c_id = ?", cid) == 0){
             System.out.print("ID doesn't exist, try again: ");
-            cid = sc.nextInt();
+            cid = conf.validateInt();
         }
         
         String rentalQuery = "SELECT r_id, c.c_name, cr.car_type, r_due_date, r_rent_date, r_payment_status FROM rental "
