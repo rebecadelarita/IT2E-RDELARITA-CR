@@ -9,6 +9,9 @@ public class history {
     
     public void showRentHistory(){
         config conf = new config();
+        customers c = new customers();
+        
+        c.viewCostumer();
         
         System.out.print("Enter Costumer ID: ");
         int cid = conf.validateInt();
