@@ -1,65 +1,27 @@
-package carrental;
+package implementation;
 
+import carrental.config;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class costumer {
-    public void Costumer(){
-        Scanner sc = new Scanner(System.in);
-        config conf = new config();
-        
-        boolean isSelected = false;
-        
-        do{
-            viewCostumer();
-            
-            System.out.println("\nCostumer:");
-            System.out.println("1. Add Costumer");
-            System.out.println("2. Edit Costumer");
-            System.out.println("3. Remove Costumer");
-            System.out.println("4. Select Costumer");
-            System.out.println("5. Exit");
-            System.out.print("Enter option: ");
-            int option = conf.validateInt();
-
-            switch(option){
-                case 1:
-                    addCostumer();
-                    break;
-                case 2:
-                    editCostumer();
-                    break;
-                case 3:
-                    removeCostumer();
-                    break;
-                case 4:
-                    viewIndivReport();
-                    break;
-                case 5:
-                    isSelected = true;
-                    break;
-                default: 
-                    System.out.println("Error, invalid option");
-            }
-        } while(!isSelected);
-    }
+public class customers {
     
     public void addCostumer(){
         Scanner sc = new Scanner(System.in);
         config conf = new config();
         
         System.out.print("Costumer Name: ");
-        String fname = sc.next();
+        String fname = sc.nextLine();
         System.out.print("Costumer Address: ");
-        String address = sc.next();
+        String address = sc.nextLine();
         
         System.out.print("Costumer Phone Number: ");
-        String pnumber = sc.next();
+        String pnumber = sc.nextLine();
         
         System.out.print("Costumer Email: ");
-        String email = sc.next();
+        String email = sc.nextLine();
 
         String sql = "INSERT INTO costumer (c_name, c_address, c_phone_number, c_email) VALUES (?, ?, ?, ?)";
 
@@ -79,16 +41,16 @@ public class costumer {
         }
         
         System.out.print("New Costumer Name: ");
-        String newFname = sc.next();
+        String newFname = sc.nextLine();
         
         System.out.print("New Costumer Address: ");
-        String newAddress = sc.next();
+        String newAddress = sc.nextLine();
         
         System.out.print("New Costumer Number: ");
-        String newNumber = sc.next();
+        String newNumber = sc.nextLine();
         
         System.out.print("New Costumer Email: ");
-        String newEmail = sc.next();
+        String newEmail = sc.nextLine();
 
         String sqlUpdate = "UPDATE costumer SET c_name = ?, c_address = ?, c_phone_number = ?, c_email = ? WHERE c_id = ?";
 
@@ -96,7 +58,6 @@ public class costumer {
     }
     
     public void removeCostumer(){
-        Scanner sc = new Scanner(System.in);
         config conf = new config();
         
         System.out.print("Enter costumer id to remove: ");
@@ -124,7 +85,6 @@ public class costumer {
     }
     
     public void viewIndivReport(){
-        Scanner sc = new Scanner(System.in);
         config conf = new config();
         
         System.out.print("Enter Costumer ID: ");
