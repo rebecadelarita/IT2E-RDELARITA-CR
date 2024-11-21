@@ -18,15 +18,12 @@ public class cars {
         System.out.print("Car Price: ");
         double cprice = conf.validateDouble();
         
-        System.out.print("Car Status: ");
-        String cstatus = sc.next();
-        
         System.out.print("Car Condition: ");
         String ccondition = sc.next();
         
-        String sql = "INSERT INTO car (car_type, car_price, car_status, car_condition) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO car (car_type, car_price, car_condition) VALUES (?, ?, ?)";
         
-        conf.addRecord(sql, ctype, cprice, cstatus, ccondition);
+        conf.addRecord(sql, ctype, cprice, ccondition);
     }
     
     public void editCar(){

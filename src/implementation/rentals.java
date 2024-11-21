@@ -14,7 +14,10 @@ public class rentals {
         LocalDate date = LocalDate.now();
         Scanner sc = new Scanner(System.in);
         config conf = new config();
+        customers c = new customers();
+        cars car = new cars();
         
+        c.viewCostumer();
         System.out.print("Select costumer id: ");
         int cid = conf.validateInt();
         
@@ -23,6 +26,7 @@ public class rentals {
             cid = conf.validateInt();
         }
         
+        car.viewCar();
         System.out.print("Enter Car ID: ");
         int car_id = conf.validateInt();
         
@@ -41,6 +45,7 @@ public class rentals {
                 + "VALUES ( ?, ?, ?, ?, ?)";
         
         conf.addRecord(sql, cid, car_id, date.toString(), due_date, status);
+        conf.updateRecord("UPDATE car SET car_status = 'Unavailable' WHERE car_id = ?", car_id);
     }
     
     public void editRent(){
